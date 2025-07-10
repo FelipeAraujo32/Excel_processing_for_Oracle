@@ -1,0 +1,24 @@
+import time
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from app.pipeline import run_me5a_BI, run_me5a_App_Geral, run_mb51_almox, run_zmm001_almox
+
+        
+if __name__ == "__main__":
+    start_time = time.time()
+    excel_path_me5a_bi = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_ME5A_BI.xlsx"
+    excel_path_me5a_app = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_ME5A_App_Geral.xlsx"
+    excel_path_mb51_almox = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_MB51_Almox.xlsx"
+    excel_path_zmm001_almox = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_ZMM001_Almox.xlsx" 
+    
+    run_me5a_BI(excel_path_me5a_bi)
+    run_me5a_App_Geral(excel_path_me5a_app)
+    #run_mb51_almox(excel_path_mb51_almox)
+    #run_zmm001_almox(excel_path_zmm001_almox)
+    
+    elapsed = time.time() - start_time
+    print(f"Final Geral Concluído em {elapsed:.2f} segundos.")
+    
