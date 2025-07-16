@@ -29,7 +29,8 @@ WHEN MATCHED THEN
         d.modificado_em = s."Data da liberação",
         d.categoria_cic = s."Categoria ClC",
         d.tipo_documento = s."Tipo de documento",
-        d.data_pedido = s."Data do pedido"
+        d.data_pedido = s."Data do pedido",
+        d.item = s."ITEM"
 WHEN NOT MATCHED THEN
     INSERT (
         tipo_documento,
@@ -43,7 +44,8 @@ WHEN NOT MATCHED THEN
         grupo_compradores,
         modificado_em,
         categoria_cic,
-        data_pedido
+        data_pedido,
+        item
     )
     VALUES (
         s."Tipo de documento",
@@ -57,7 +59,8 @@ WHEN NOT MATCHED THEN
         s."Grupo de compradores",
         s."Data da liberação",
         s."Categoria ClC",
-        s."Data do pedido"
+        s."Data do pedido",
+        s."ITEM"
     )
 
 

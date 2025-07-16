@@ -1,5 +1,5 @@
 import time
-from .pipeline_steps import run_truncate_table, run_insert_data_ME5A, run_merge_data, run_insert_data_MB51, run_insert_data_ZMM001
+from .pipeline_steps import run_truncate_table, run_insert_data_ME5A, run_merge_data, run_insert_data_MB51, run_insert_data_ZMM001, run_insert_data_ZMM023
 
 
 def run_me5a_BI(excel_path_bi):
@@ -37,3 +37,9 @@ def run_zmm001_almox(excel_path_zmm001_almox):
     run_insert_data_ZMM001(excel_path_zmm001_almox)
     run_merge_data("sql/dml/Merge_STG_SAP_ZMM001_Almox.sql")
     run_truncate_table("sql/util/Stg_Truncate_Sap_ZMM001_Almox.sql")
+    
+def run_zmm023_Geral(excel_path_zmmm023_Geral):
+    run_truncate_table("sql/util/Stg_Truncate_Sap_ZMM023.sql")
+    run_insert_data_ZMM023(excel_path_zmmm023_Geral)
+    run_merge_data("sql/dml/Merge_STG_SAP_ZMM023.sql")
+    run_truncate_table("sql/util/Stg_Truncate_Sap_ZMM023.sql")

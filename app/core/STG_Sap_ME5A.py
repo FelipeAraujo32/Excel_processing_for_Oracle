@@ -16,3 +16,4 @@ class STG_Sap_ME5A:
     data_liberacao: str
     codigo_eliminacao: str
     data_pedido: str
+    item_do_pedido: str
