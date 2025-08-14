@@ -26,6 +26,7 @@ class InsertService:
         try:
             sql = self.load_sql(path)
             self.cursor.executemany(sql, registros)
+            self.conn.commit()
             print(f"{len(registros)} Registros inseridos com sucesso.")
         except oracledb.Error as e:
             error, = e.args
