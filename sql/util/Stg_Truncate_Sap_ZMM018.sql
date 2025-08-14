@@ -6,5 +6,5 @@
 -- Date: 2025-04-17
 -- ==========================================================
 
-TRUNCATE TABLE STG_SAP_ZMM023
+TRUNCATE TABLE STG_SAP_ZMM018
 

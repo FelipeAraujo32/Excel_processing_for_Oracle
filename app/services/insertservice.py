@@ -99,42 +99,36 @@ class InsertService:
             self.conn.rollback()
             raise
     
-    def insert_requests_ZMM023(self, requisicoes: list): 
+    def insert_requests_ZMM018(self, requisicoes: list):
         registros = [
             (
-                r.nome_da_firma, r.grupo_de_compradores, r.tipo_documento_compras, r.documento_compras, r.item, r.material, r.texto_breve,
-                r.grupo_mercadorias, r.denom_grupo_mercadorias, r.qtd_pedido, r.um_pedido, r.requisicao_compra, r.item_requisicao,
-                r.num_acompanhamento, r.preco_liq_pedido, r.moeda, r.valor_liquido_pedido, r.cambio_pedido_reais, r.fornecedor,
-                r.nome_fornecedor, r.data_criacao, r.data_solicitacao, r.data_lancamento, r.tipo_fornecedor, r.orcamento,
-                r.centro_custo,r.aplicacao
+                r.grupo_de_compradores, r.tipo_documento_compras, r.centro_custo, r.desc_centro_custo, r.material, r.num_acompanhamento, 
+                r.denominacao, r.doc_compras, r.requisicao_compra, r.item, r.texto_breve, r.qtd_pedido, r.um_pedido, r.preco_liq_pedido,
+                r.moeda, r.valor_liquido, r.data_criacao, r.denom_grupo_mercadorias, r.fornecedor, r.nome_empresa
             )
             for r in requisicoes
-        ]
-         
+    ]
+
         sql_insert = """
-            INSERT INTO STG_SAP_ZMM023 (
-                NOME_DA_FIRMA, GRUPO_DE_COMPRADORES, TIPO_DOCUMENTO_COMPRAS,
-                DOCUMENTO_COMPRAS, ITEM, MATERIAL, TEXTO_BREVE, GRUPO_MERCADORIAS,
-                DENOM_GRUPO_MERCADORIAS, QTD_PEDIDO, UM_PEDIDO, REQUISICAO_COMPRA,
-                ITEM_REQUISICAO, NUM_ACOMPANHAMENTO, PRECO_LIQ_PEDIDO, MOEDA,
-                VALOR_LIQUIDO_PEDIDO, CAMBIO_PEDIDO_REAIS, FORNECEDOR, NOME_FORNECEDOR,
-                DATA_CRIACAO, DATA_SOLICITACAO, DATA_LANCAMENTO, TIPO_FORNECEDOR,
-                ORCAMENTO, CENTRO_CUSTO, APLICACAO
+            INSERT INTO STG_SAP_ZMM018 (
+                GRUPO_COMPRADORES, TP_DOC_COMPRAS, CENTRO_CUSTO, DESC_CENTRO_CUSTO,
+                MATERIAL, NUM_ACOMPANHAMENTO, DENOMINACAO, DOC_COMPRAS, REQUISICAO_COMPRA,
+                ITEM, TEXTO_BREVE, QTD_PEDIDO, UM_PEDIDO, PRECO_LIQ_PEDIDO, MOEDA,
+                VALOR_LIQUIDO, DATA_CRIACAO, DENOM_GRUPO_MERC, FORNECEDOR, NOME_EMPRESA
             ) VALUES (
                 :1, :2, :3, :4, :5, :6, :7, :8, :9, :10,
-                :11, :12, :13, :14, :15, :16, :17, :18, :19, :20,
-                :21, :22, :23, :24, :25, :26, :27
+                :11, :12, :13, :14, :15, :16, :17, :18, :19, :20
             )
-            """
-        
+        """
+
         try:
             self.cursor.executemany(sql_insert, registros)
             self.conn.commit()
-            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_ZMM023.")
+            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_ZMM018.")
         except oracledb.Error as e:
             error, = e.args
             print("Erro Oracle:")
             print(f"Code: {error.code}")
             print(f"Message: {error.message}")
             self.conn.rollback()
-            raise   
+            raise

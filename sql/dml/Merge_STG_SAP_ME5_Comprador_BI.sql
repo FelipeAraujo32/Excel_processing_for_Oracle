@@ -11,7 +11,7 @@ USING (
     SELECT *
     FROM STG_SAP_ME5A
     WHERE "Código de eliminação" = 'False'
-        AND "Grupo de compradores" IN ('1CL','1CS','1FN','1ML','1CO','1IL', '1FA', '1GA')
+        AND "Grupo de compradores" IN ('1CL','1CS','1FN','1ML','1CO','1IL', '1FA', '1GA', '100')
         AND "Pedido" IS NULL
 ) s
 ON (

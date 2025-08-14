@@ -1,7 +1,7 @@
 from app.services.insertservice import InsertService
 from app.services.truncateservice import TrucateService
 from app.services.mergeservice import MergeService
-from app.services.processor_excel import process_excel_file_STG_Sap_ME5A, process_excel_file_STG_Sap_MB51, process_excel_file_STG_Sap_ZMM001, process_excel_file_STG_Sap_ZMM023
+from app.services.processor_excel import process_excel_file_STG_Sap_ME5A, process_excel_file_STG_Sap_MB51, process_excel_file_STG_Sap_ZMM001, process_excel_file_STG_Sap_ZMM018
 
 
 # Function to insert data into the temporary table
@@ -20,10 +20,10 @@ def run_insert_data_ZMM001(excel_path):
     requisicoes = process_excel_file_STG_Sap_ZMM001(excel_path)
     repository_sql.insert_requests_ZMM001(requisicoes)
     
-def run_insert_data_ZMM023(excel_path):
+def run_insert_data_ZMM018(excel_path):
     repository_sql = InsertService()
-    requisicoes = process_excel_file_STG_Sap_ZMM023(excel_path)
-    repository_sql.insert_requests_ZMM023(requisicoes)
+    requisicoes = process_excel_file_STG_Sap_ZMM018(excel_path)
+    repository_sql.insert_requests_ZMM018(requisicoes)
     
     
 # Function to perform the MERGE for the final table
