@@ -22,24 +22,11 @@ class InsertService:
             raise
 
     
-    def insert_requests_ME5A(self, requisicoes: list):
-        registros = [
-            (
-                r.tipo_documento, r.requisicao_compra, r.pedido, r.texto_breve,
-                r.material, r.item_reqc, r.qtd_solicitada, r.requisitante,
-                r.grupo_compradores, r.data_liberacao, r.categoria_clc, r.codigo_eliminacao, r.data_pedido, r.item_do_pedido
-            )
-            for r in requisicoes
-            
-        ] 
-        sql_insert ="""
-            INSERT INTO STG_SAP_ME5A ("Tipo de documento", "Requisição de compra", "Pedido", "Texto breve", "Material", "Item reqC", "qtd.solicitada", "Requisitante", "Grupo de compradores", "Data da liberação", "Categoria ClC",  "Código de eliminação", "Data do pedido", "ITEM") 
-            VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)
-            """
+    def insert_data_sql(self, registros: str,  path: str):
         try:
-            self.cursor.executemany(sql_insert, registros)
-            self.conn.commit()
-            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_ME5A.")
+            sql = self.load_sql(path)
+            self.cursor.executemany(sql, registros)
+            print(f"{len(registros)} Registros inseridos com sucesso.")
         except oracledb.Error as e:
             error, = e.args
             print("Erro Oracle:")
@@ -47,8 +34,22 @@ class InsertService:
             print(f"Message: {error.message}")
             self.conn.rollback()
             raise
+    
+    def insert_requests_ME5A(self, requisicoes: list,  path: str):
+        registros = [
+            (
+                r.tipo_documento, r.requisicao_compra, r.pedido, r.texto_breve,
+                r.material, r.item_reqc, r.qtd_solicitada, r.requisitante,
+                r.grupo_compradores, r.data_liberacao, r.categoria_clc, r.codigo_eliminacao, r.data_pedido, r.item_do_pedido
+            )
+            for r in requisicoes     
+        ] 
+        insert_sql = InsertService()
+        insert_sql.insert_data_sql(registros, path) 
+        
+        
          
-    def insert_requests_MB51(self, requisicoes: list):
+    def insert_requests_MB51(self, requisicoes: list, path: str):
         registros = [
             (
                 r.material, r.texto_breve, r.deposito, r.tipo_movimento,
@@ -58,48 +59,21 @@ class InsertService:
             for r in requisicoes
             
         ] 
-        sql_insert ="""
-            INSERT INTO STG_SAP_MB51 ("material", "texto_breve_material", "deposito", "tipo_movimento", "doc_material", "data_lancamento", "qtd_um_registro", "um_registro", "centro_custo", "montante_em_mi") 
-            VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10)
-            """
-        try:
-            self.cursor.executemany(sql_insert, registros)
-            self.conn.commit()
-            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_MB51.")
-        except oracledb.Error as e:
-            error, = e.args
-            print("Erro Oracle:")
-            print(f"Code: {error.code}")
-            print(f"Message: {error.message}")
-            self.conn.rollback()
-            raise
+        insert_sql = InsertService()
+        insert_sql.insert_data_sql(registros, path)
          
-    def insert_requests_ZMM001(self, requisicoes: list):
+    def insert_requests_ZMM001(self, requisicoes: list, path: str):
         registros = [
             (
                 r.tmat, r.material, r.n_material, r.n_material_antigo,
                 r.pos_dpst, r.utiliz_livre, r.umb
             )
             for r in requisicoes
-            
         ] 
-        sql_insert ="""
-            INSERT INTO STG_SAP_ZMM001 ("tmat", "material", "n_material", "n_material_antigo", "pos_dpst", "utiliz_livre", "umb") 
-            VALUES (:1, :2, :3, :4, :5, :6, :7)
-            """
-        try:
-            self.cursor.executemany(sql_insert, registros)
-            self.conn.commit()
-            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_ZM001.")
-        except oracledb.Error as e:
-            error, = e.args
-            print("Erro Oracle:")
-            print(f"Code: {error.code}")
-            print(f"Message: {error.message}")
-            self.conn.rollback()
-            raise
+        insert_sql = InsertService()
+        insert_sql.insert_data_sql(registros, path)
     
-    def insert_requests_ZMM018(self, requisicoes: list):
+    def insert_requests_ZMM018(self, requisicoes: list, path: str):
         registros = [
             (
                 r.grupo_de_compradores, r.tipo_documento_compras, r.centro_custo, r.desc_centro_custo, r.material, r.num_acompanhamento, 
@@ -107,28 +81,6 @@ class InsertService:
                 r.moeda, r.valor_liquido, r.data_criacao, r.denom_grupo_mercadorias, r.fornecedor, r.nome_empresa
             )
             for r in requisicoes
-    ]
-
-        sql_insert = """
-            INSERT INTO STG_SAP_ZMM018 (
-                GRUPO_COMPRADORES, TP_DOC_COMPRAS, CENTRO_CUSTO, DESC_CENTRO_CUSTO,
-                MATERIAL, NUM_ACOMPANHAMENTO, DENOMINACAO, DOC_COMPRAS, REQUISICAO_COMPRA,
-                ITEM, TEXTO_BREVE, QTD_PEDIDO, UM_PEDIDO, PRECO_LIQ_PEDIDO, MOEDA,
-                VALOR_LIQUIDO, DATA_CRIACAO, DENOM_GRUPO_MERC, FORNECEDOR, NOME_EMPRESA
-            ) VALUES (
-                :1, :2, :3, :4, :5, :6, :7, :8, :9, :10,
-                :11, :12, :13, :14, :15, :16, :17, :18, :19, :20
-            )
-        """
-
-        try:
-            self.cursor.executemany(sql_insert, registros)
-            self.conn.commit()
-            print(f"{len(registros)} registros inseridos com sucesso na STG_SAP_ZMM018.")
-        except oracledb.Error as e:
-            error, = e.args
-            print("Erro Oracle:")
-            print(f"Code: {error.code}")
-            print(f"Message: {error.message}")
-            self.conn.rollback()
-            raise
+        ]
+        insert_sql = InsertService()
+        insert_sql.insert_data_sql(registros, path)

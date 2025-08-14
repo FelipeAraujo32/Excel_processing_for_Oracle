@@ -1,0 +1,2 @@
+INSERT INTO STG_SAP_ME5A ("Tipo de documento", "Requisição de compra", "Pedido", "Texto breve", "Material", "Item reqC", "qtd.solicitada", "Requisitante", "Grupo de compradores", "Data da liberação", "Categoria ClC",  "Código de eliminação", "Data do pedido", "ITEM") 
+            VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)

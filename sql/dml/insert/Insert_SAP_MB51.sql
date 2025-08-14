@@ -1,0 +1,2 @@
+INSERT INTO STG_SAP_MB51 ("material", "texto_breve_material", "deposito", "tipo_movimento", "doc_material", "data_lancamento", "qtd_um_registro", "um_registro", "centro_custo", "montante_em_mi") 
+            VALUES (:1, :2, :3, :4, :5, :6, :7, :8, :9, :10)

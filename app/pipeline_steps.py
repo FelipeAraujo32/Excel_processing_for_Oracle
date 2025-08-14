@@ -5,25 +5,25 @@ from app.services.processor_excel import process_excel_file_STG_Sap_ME5A, proces
 
 
 # Function to insert data into the temporary table
-def run_insert_data_ME5A(excel_path):
+def run_insert_data_ME5A(excel_path, sql_path):
     repository_sql = InsertService()
     requisicoes = process_excel_file_STG_Sap_ME5A(excel_path)
-    repository_sql.insert_requests_ME5A(requisicoes)
+    repository_sql.insert_requests_ME5A(requisicoes, sql_path)
     
-def run_insert_data_MB51(excel_path):
+def run_insert_data_MB51(excel_path, sql_path):
     repository_sql = InsertService()
     requisicoes = process_excel_file_STG_Sap_MB51(excel_path)
-    repository_sql.insert_requests_MB51(requisicoes)
+    repository_sql.insert_requests_MB51(requisicoes,sql_path)
     
-def run_insert_data_ZMM001(excel_path):
+def run_insert_data_ZMM001(excel_path, sql_path):
     repository_sql = InsertService()
     requisicoes = process_excel_file_STG_Sap_ZMM001(excel_path)
-    repository_sql.insert_requests_ZMM001(requisicoes)
+    repository_sql.insert_requests_ZMM001(requisicoes, sql_path)
     
-def run_insert_data_ZMM018(excel_path):
+def run_insert_data_ZMM018(excel_path, sql_path):
     repository_sql = InsertService()
     requisicoes = process_excel_file_STG_Sap_ZMM018(excel_path)
-    repository_sql.insert_requests_ZMM018(requisicoes)
+    repository_sql.insert_requests_ZMM018(requisicoes, sql_path)
     
     
 # Function to perform the MERGE for the final table

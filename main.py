@@ -15,10 +15,10 @@ if __name__ == "__main__":
     excel_path_zmm001_almox = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_ZMM001_Almox.xlsx" 
     excel_path_zmmm018_Geral = "c:/Users/fasilva/Documents/SAP/SAP GUI/export_ZMM018_Geral.xlsx"
     
-    #run_me5a_BI(excel_path_me5a_bi)
-    #run_me5a_App_Geral(excel_path_me5a_app)
-    #run_mb51_almox(excel_path_mb51_almox)
-    #run_zmm001_almox(excel_path_zmm001_almox)
+    run_me5a_BI(excel_path_me5a_bi)
+    run_me5a_App_Geral(excel_path_me5a_app)
+    run_mb51_almox(excel_path_mb51_almox)
+    run_zmm001_almox(excel_path_zmm001_almox)
     run_zmm018_Geral(excel_path_zmmm018_Geral)
     
     elapsed = time.time() - start_time
