@@ -85,6 +85,20 @@ def process_excel_file_STG_Sap_ZMM018(caminho: str) -> list[STG_Sap_ZMM018]:
     
     print("Columns found:", df.columns.tolist())
     
+    # Ordena pela data de criação (mais recente primeiro)
+    df.sort_values(
+        by=['Documento de compras', 'Item', 'Requisição de compra', 'Dta.criação'],
+        ascending=[True, True, True, False],
+        inplace=True
+    )
+    
+    # Remove duplicados com base nas colunas-chave
+    df.drop_duplicates(
+        subset=['Documento de compras', 'Item', 'Requisição de compra'],
+        keep='last', 
+        inplace=True
+    )
+    
     requisicoes = []
     
     for _, row in df.iterrows():
@@ -96,7 +110,7 @@ def process_excel_file_STG_Sap_ZMM018(caminho: str) -> list[STG_Sap_ZMM018]:
             num_acompanhamento     = row['Nº acompanhamento'] if pd.notna(row['Nº acompanhamento']) else None,
             denominacao            = row['Denominação'] if pd.notna(row['Denominação']) else None,
             doc_compras            = row['Documento de compras'] if pd.notna(row['Documento de compras']) else None,
-            requisicao_compra     = row['Requisição de compra'] if pd.notna(row['Requisição de compra']) else None,
+            requisicao_compra      = row['Requisição de compra'] if pd.notna(row['Requisição de compra']) else None,
             material               = row['Material'] if pd.notna(row['Material']) else None,
             item                   = row['Item'] if pd.notna(row['Item']) else None,
             texto_breve            = row['Texto breve'] if pd.notna(row['Texto breve']) else None,
